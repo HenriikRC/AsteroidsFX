@@ -1,12 +1,11 @@
-package dk.sdu.mmmi.cbse.playersystem;
+package dk.sdu.mmmi.cbse.asteroidsystem.playersystem;
 
-import dk.sdu.mmmi.cbse.common.bullet.Bullet;
-import dk.sdu.mmmi.cbse.common.bullet.BulletSPI;
-import dk.sdu.mmmi.cbse.common.data.Entity;
-import dk.sdu.mmmi.cbse.common.data.GameData;
-import dk.sdu.mmmi.cbse.common.data.GameKeys;
-import dk.sdu.mmmi.cbse.common.data.World;
-import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
+import dk.sdu.mmmi.cbse.asteroidsystem.common.bullet.BulletSPI;
+import dk.sdu.mmmi.cbse.asteroidsystem.common.data.Entity;
+import dk.sdu.mmmi.cbse.asteroidsystem.common.data.GameData;
+import dk.sdu.mmmi.cbse.asteroidsystem.common.data.GameKeys;
+import dk.sdu.mmmi.cbse.asteroidsystem.common.data.World;
+import dk.sdu.mmmi.cbse.asteroidsystem.common.services.IEntityProcessingService;
 
 import java.util.Collection;
 import java.util.ServiceLoader;

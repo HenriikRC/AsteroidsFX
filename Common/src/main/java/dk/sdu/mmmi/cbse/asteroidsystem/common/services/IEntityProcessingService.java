@@ -1,7 +1,7 @@
-package dk.sdu.mmmi.cbse.common.services;
+package dk.sdu.mmmi.cbse.asteroidsystem.common.services;
 
-import dk.sdu.mmmi.cbse.common.data.GameData;
-import dk.sdu.mmmi.cbse.common.data.World;
+import dk.sdu.mmmi.cbse.asteroidsystem.common.data.GameData;
+import dk.sdu.mmmi.cbse.asteroidsystem.common.data.World;
 
 public interface IEntityProcessingService {
 
