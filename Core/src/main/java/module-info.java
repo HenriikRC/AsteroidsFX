@@ -1,5 +1,5 @@
-import dk.sdu.mmmi.cbse.asteroidsystem.common.services.IEntityProcessingService;
-import dk.sdu.mmmi.cbse.asteroidsystem.common.services.IGamePluginService;
+import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
+import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
 
 module Core {
     requires Common;

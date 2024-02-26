@@ -1,12 +1,12 @@
 package dk.sdu.mmmi.cbse.core;
 
-import dk.sdu.mmmi.cbse.asteroidsystem.common.data.GameData;
-import dk.sdu.mmmi.cbse.asteroidsystem.common.data.Entity;
-import dk.sdu.mmmi.cbse.asteroidsystem.common.data.GameKeys;
-import dk.sdu.mmmi.cbse.asteroidsystem.common.data.World;
-import dk.sdu.mmmi.cbse.asteroidsystem.common.services.IEntityProcessingService;
-import dk.sdu.mmmi.cbse.asteroidsystem.common.services.IGamePluginService;
-import dk.sdu.mmmi.cbse.asteroidsystem.common.services.IPostEntityProcessingService;
+import dk.sdu.mmmi.cbse.common.data.GameData;
+import dk.sdu.mmmi.cbse.common.data.Entity;
+import dk.sdu.mmmi.cbse.common.data.GameKeys;
+import dk.sdu.mmmi.cbse.common.data.World;
+import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
+import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
+import dk.sdu.mmmi.cbse.common.services.IPostEntityProcessingService;
 
 import java.util.Collection;
 import java.util.Map;

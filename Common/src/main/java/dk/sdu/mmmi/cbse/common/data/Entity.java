@@ -1,4 +1,4 @@
-package dk.sdu.mmmi.cbse.asteroidsystem.common.data;
+package dk.sdu.mmmi.cbse.common.data;
 
 import java.io.Serializable;
 import java.util.UUID;

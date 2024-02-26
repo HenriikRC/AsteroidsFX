@@ -1,11 +1,11 @@
-package dk.sdu.mmmi.cbse.asteroidsystem.playersystem;
+package dk.sdu.mmmi.cbse.playersystem;
 
-import dk.sdu.mmmi.cbse.asteroidsystem.common.bullet.BulletSPI;
-import dk.sdu.mmmi.cbse.asteroidsystem.common.data.Entity;
-import dk.sdu.mmmi.cbse.asteroidsystem.common.data.GameData;
-import dk.sdu.mmmi.cbse.asteroidsystem.common.data.GameKeys;
-import dk.sdu.mmmi.cbse.asteroidsystem.common.data.World;
-import dk.sdu.mmmi.cbse.asteroidsystem.common.services.IEntityProcessingService;
+import dk.sdu.mmmi.cbse.common.bullet.BulletSPI;
+import dk.sdu.mmmi.cbse.common.data.Entity;
+import dk.sdu.mmmi.cbse.common.data.GameData;
+import dk.sdu.mmmi.cbse.common.data.GameKeys;
+import dk.sdu.mmmi.cbse.common.data.World;
+import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 
 import java.util.Collection;
 import java.util.ServiceLoader;
@@ -17,7 +17,7 @@ public class PlayerControlSystem implements IEntityProcessingService {
 
     @Override
     public void process(GameData gameData, World world) {
-            
+
         for (Entity player : world.getEntities(Player.class)) {
             if (gameData.getKeys().isDown(GameKeys.LEFT)) {
                 player.setRotation(player.getRotation() - 5);                
@@ -28,8 +28,8 @@ public class PlayerControlSystem implements IEntityProcessingService {
             if (gameData.getKeys().isDown(GameKeys.UP)) {
                 double changeX = Math.cos(Math.toRadians(player.getRotation()));
                 double changeY = Math.sin(Math.toRadians(player.getRotation()));
-                player.setX(player.getX() + changeX);
-                player.setY(player.getY() + changeY);
+                player.setX(player.getX() + changeX * 1.5);
+                player.setY(player.getY() + changeY * 1.5);
             }
             if(gameData.getKeys().isDown(GameKeys.SPACE)) {                
                 getBulletSPIs().stream().findFirst().ifPresent(
@@ -52,8 +52,7 @@ public class PlayerControlSystem implements IEntityProcessingService {
         if (player.getY() > gameData.getDisplayHeight()) {
             player.setY(gameData.getDisplayHeight()-1);
         }
-
-                                        
+        PlayerTargetSystem.updatePlayerPosition(player.getX(), player.getY());
         }
     }
 
