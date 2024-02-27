@@ -19,14 +19,17 @@ public class EnemyControlSystem implements IEntityProcessingService {
     private Random rng = new Random();
 
     private final int SHOOTING_FREQUENCY = 3;
-
+    private final int MAX_NO_ENEMIES = 15;
 
     @Override
     public void process(GameData gameData, World world) {
+
+
         Optional<TargetSPI> targetService = ServiceLoader.load(TargetSPI.class).findFirst();
 
         for (Entity enemy : world.getEntities(Enemy.class)) {
             if(targetService.isPresent()) {
+                double speed = ((Enemy)enemy).getSpeed();
                 double playerX = targetService.get().getTargetX();
                 double playerY = targetService.get().getTargetY();
 
@@ -36,8 +39,8 @@ public class EnemyControlSystem implements IEntityProcessingService {
 
                 double changeX = Math.cos(Math.toRadians(enemy.getRotation()));
                 double changeY = Math.sin(Math.toRadians(enemy.getRotation()));
-                enemy.setX(enemy.getX() + changeX);
-                enemy.setY(enemy.getY() + changeY);
+                enemy.setX(enemy.getX() + changeX * speed);
+                enemy.setY(enemy.getY() + changeY * speed);
             }
 
             int shootingNumber = rng.nextInt(0,100);
@@ -47,6 +50,11 @@ public class EnemyControlSystem implements IEntityProcessingService {
             adjustPosition(enemy, gameData);
         }
     }
+
+    public void spawnEnemy(){
+
+    }
+
 
     private void attemptToShootAtPlayer(Entity enemy, GameData gameData, World world) {
         Optional<TargetSPI> targetService = ServiceLoader.load(TargetSPI.class).findFirst();
