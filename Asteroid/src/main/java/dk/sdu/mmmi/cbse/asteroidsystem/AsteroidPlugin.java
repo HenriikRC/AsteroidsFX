@@ -3,28 +3,45 @@ package dk.sdu.mmmi.cbse.asteroidsystem;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
+import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
 
 import java.util.Random;
 
-public class AsteroidPlugin  implements IGamePluginService {
+public class AsteroidPlugin  implements IGamePluginService, IEntityProcessingService {
 
     private final Random rand = new Random();
-    private final int MAX_ASTEROIDS = 15;
-    private final double MIN_SPEED = 0.1d;
-    private final double MAX_SPEED = 1.5d;
+    private final int MAX_ASTEROIDS = 20;
+    private final int SPAWN_INTERVAL = 3000;
+    private volatile long lastSpawnTime = 0;
+    private final double MIN_SPEED = 0.5d;
+    private final double MAX_SPEED = 3d;
 
     @Override
     public void start(GameData gameData, World world) {
-        for(int i = 0; i <= MAX_ASTEROIDS; i++) {
+        /*for(int i = 0; i <= MAX_ASTEROIDS/2; i++) {
             Entity asteroid = createAsteroid(gameData);
             world.addEntity(asteroid);
+        }
+
+         */
+    }
+
+    @Override
+    public void process(GameData gameData, World world) {
+        long currentTime = System.currentTimeMillis();
+
+        if (currentTime - lastSpawnTime >= SPAWN_INTERVAL && world.getEntities(Asteroid.class).size() < MAX_ASTEROIDS) {
+            Entity asteroid = createAsteroid(gameData);
+            world.addEntity(asteroid);
+            System.out.println("Spawned 1 more" + asteroid.getX() + " " + asteroid.getY());
+            lastSpawnTime = currentTime;
         }
     }
 
     private Entity createAsteroid(GameData gameData) {
         Asteroid asteroid = new Asteroid();
-        asteroid.setPolygonCoordinates(0, 0, 10, 0, 10, 10, 0, 10);
+        asteroid.setPolygonCoordinates(0, 0, rand.nextInt(5,25), 0, rand.nextInt(5,25), rand.nextInt(5,25), 0, rand.nextInt(5,25),0,rand.nextInt(5,25));
         int side = rand.nextInt(4);
 
         double x, y;
@@ -72,4 +89,5 @@ public class AsteroidPlugin  implements IGamePluginService {
     public void stop(GameData gameData, World world) {
         world.getEntities(Asteroid.class).forEach(world::removeEntity);
     }
+
 }

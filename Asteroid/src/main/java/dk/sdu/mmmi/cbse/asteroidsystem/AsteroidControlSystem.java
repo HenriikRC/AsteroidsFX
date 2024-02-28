@@ -17,7 +17,9 @@ public class AsteroidControlSystem implements IEntityProcessingService {
                 asteroid.setX(asteroid.getX() + dx);
                 asteroid.setY(asteroid.getY() + dy);
 
-
+                if(asteroid.getX() < -50 || asteroid.getX() > gameData.getDisplayWidth() + 50 || asteroid.getY() < -50 || asteroid.getY() > gameData.getDisplayHeight()+50) {
+                    world.removeEntity(asteroid);
+                }
                 /*
                 if (asteroid.getX() < 0 || asteroid.getX() > gameData.getDisplayWidth()||
 
