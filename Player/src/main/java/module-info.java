@@ -14,5 +14,4 @@ module Player {
     provides IGamePluginService with PlayerPlugin;
     provides IEntityProcessingService with PlayerControlSystem;
     provides TargetSPI with PlayerTargetSystem;
-    
 }
