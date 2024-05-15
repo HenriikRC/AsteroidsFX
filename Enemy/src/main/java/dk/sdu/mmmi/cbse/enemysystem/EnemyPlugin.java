@@ -1,6 +1,7 @@
 package dk.sdu.mmmi.cbse.enemysystem;
 
 import dk.sdu.mmmi.cbse.common.data.Entity;
+import dk.sdu.mmmi.cbse.common.data.EntityType;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
@@ -28,6 +29,8 @@ public class EnemyPlugin implements IGamePluginService {
         double randomY = randomGenerator.nextDouble(0, gameData.getDisplayWidth());
         enemyShip.setX(randomX);
         enemyShip.setY(randomY);
+        enemyShip.setRadius(5);
+        enemyShip.setEntityType(EntityType.ENEMY);
         return enemyShip;
     }
 

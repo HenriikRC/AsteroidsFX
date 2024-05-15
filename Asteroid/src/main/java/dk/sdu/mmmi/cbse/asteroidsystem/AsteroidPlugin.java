@@ -1,6 +1,7 @@
 package dk.sdu.mmmi.cbse.asteroidsystem;
 
 import dk.sdu.mmmi.cbse.common.data.Entity;
+import dk.sdu.mmmi.cbse.common.data.EntityType;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
@@ -41,7 +42,9 @@ public class AsteroidPlugin  implements IGamePluginService, IEntityProcessingSer
 
     private Entity createAsteroid(GameData gameData) {
         Asteroid asteroid = new Asteroid();
-        asteroid.setPolygonCoordinates(0, 0, rand.nextInt(5,25), 0, rand.nextInt(5,25), rand.nextInt(5,25), 0, rand.nextInt(5,25),0,rand.nextInt(5,25));
+        int size = rand.nextInt(10,40);
+        asteroid.setSize(size);
+        asteroid.setPolygonCoordinates(0, 0, size, 0, size, size, 0, size,0,size);
         int side = rand.nextInt(4);
 
         double x, y;
@@ -82,6 +85,9 @@ public class AsteroidPlugin  implements IGamePluginService, IEntityProcessingSer
         double speed = rand.nextDouble(MIN_SPEED, MAX_SPEED);
         asteroid.setSpeed(speed);
 
+        asteroid.setRadius(size);
+
+        asteroid.setEntityType(EntityType.ASTEROID);
         return asteroid;
     }
 

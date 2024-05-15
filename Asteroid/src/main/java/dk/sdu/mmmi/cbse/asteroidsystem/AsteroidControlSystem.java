@@ -1,10 +1,12 @@
 package dk.sdu.mmmi.cbse.asteroidsystem;
 
+import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
+import dk.sdu.mmmi.cbse.common.services.AsteroidSPI;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 
-public class AsteroidControlSystem implements IEntityProcessingService {
+public class AsteroidControlSystem implements IEntityProcessingService, AsteroidSPI {
 
     @Override
     public void process(GameData gameData, World world) {
@@ -30,5 +32,40 @@ public class AsteroidControlSystem implements IEntityProcessingService {
 
             }
         });
+    }
+
+    @Override
+    public void splitAsteroid(Entity entity, World world) {
+        Asteroid asteroid = (Asteroid) entity;
+        int newSize = asteroid.getSize() / 2;
+        if (newSize < 10) {
+            world.removeEntity(asteroid);
+            return;
+        }
+
+        double originalAngle = asteroid.getRotation();
+        double speed = asteroid.getSpeed();
+
+        Asteroid asteroid1 = new Asteroid();
+        asteroid1.setSize(newSize);
+        asteroid1.setSpeed(speed);
+        asteroid1.setRotation(originalAngle - 45);
+        asteroid1.setX(asteroid.getX() + newSize);
+        asteroid1.setY(asteroid.getY());
+        asteroid1.setPolygonCoordinates(0, 0, newSize, 0, newSize, newSize, 0, newSize,0,newSize);
+        asteroid1.setRadius(newSize);
+
+        Asteroid asteroid2 = new Asteroid();
+        asteroid2.setSize(newSize);
+        asteroid2.setSpeed(speed);
+        asteroid2.setRotation(originalAngle + 45);
+        asteroid2.setX(asteroid.getX() - newSize);
+        asteroid2.setY(asteroid.getY());
+        asteroid2.setPolygonCoordinates(0, 0, newSize, 0, newSize, newSize, 0, newSize,0,newSize);
+        asteroid2.setRadius(newSize);
+
+        world.addEntity(asteroid1);
+        world.addEntity(asteroid2);
+        world.removeEntity(asteroid);
     }
 }
