@@ -4,6 +4,7 @@ import dk.sdu.mmmi.cbse.common.bullet.BulletSPI;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
+import dk.sdu.mmmi.cbse.common.services.HpSPI;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import dk.sdu.mmmi.cbse.common.services.TargetSPI;
 
@@ -14,7 +15,7 @@ import java.util.ServiceLoader;
 
 import static java.util.stream.Collectors.toList;
 
-public class EnemyControlSystem implements IEntityProcessingService {
+public class EnemyControlSystem implements IEntityProcessingService, HpSPI {
 
     private Random rng = new Random();
 
@@ -109,5 +110,17 @@ public class EnemyControlSystem implements IEntityProcessingService {
 
     private Collection<? extends BulletSPI> getBulletSPIs() {
         return ServiceLoader.load(BulletSPI.class).stream().map(ServiceLoader.Provider::get).collect(toList());
+    }
+
+    @Override
+    public void reduceHp(Entity entity, World world) {
+        if (entity instanceof Enemy) {
+            Enemy enemy = (Enemy) entity;
+            enemy.setHealthPoints(enemy.getHealthPoints() - 1);
+            System.out.println("Enemy hit, health: " + enemy.getHealthPoints());
+            if (enemy.getHealthPoints() <= 0) {
+                world.removeEntity(enemy);
+            }
+        }
     }
 }

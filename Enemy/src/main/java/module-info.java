@@ -1,5 +1,6 @@
 
 import dk.sdu.mmmi.cbse.common.bullet.BulletSPI;
+import dk.sdu.mmmi.cbse.common.services.HpSPI;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
 import dk.sdu.mmmi.cbse.common.services.TargetSPI;
@@ -13,5 +14,5 @@ module Enemy {
     uses BulletSPI;
     provides IGamePluginService with EnemyPlugin;
     provides IEntityProcessingService with EnemyControlSystem;
-
+    provides HpSPI with EnemyControlSystem;
 }

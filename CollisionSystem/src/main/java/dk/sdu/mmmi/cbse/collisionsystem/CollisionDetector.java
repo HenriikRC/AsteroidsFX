@@ -5,6 +5,7 @@ import dk.sdu.mmmi.cbse.common.data.EntityType;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.common.services.AsteroidSPI;
+import dk.sdu.mmmi.cbse.common.services.HpSPI;
 import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
 import dk.sdu.mmmi.cbse.common.services.IPostEntityProcessingService;
 
@@ -33,7 +34,7 @@ public class CollisionDetector implements IPostEntityProcessingService {
                     // CollisionDetection
                     if (entity1.getEntityType() == EntityType.PLAYER || entity1.getEntityType() == EntityType.ENEMY) {
                         if (entity2.getEntityType() == EntityType.BULLET) {
-                            // handle collision
+                            getHpSPI().reduceHp(entity1, world);
                         }
                     } else if (entity1.getEntityType() == EntityType.ASTEROID) {
                         if (entity2.getEntityType() == EntityType.BULLET) {
@@ -41,7 +42,6 @@ public class CollisionDetector implements IPostEntityProcessingService {
                         }
                     }
                 }
-                //test
             }
         }
     }
@@ -55,5 +55,9 @@ public class CollisionDetector implements IPostEntityProcessingService {
 
     private AsteroidSPI getAsteroidSPI() {
         return ServiceLoader.load(AsteroidSPI.class).stream().map(ServiceLoader.Provider::get).collect(toList()).stream().findFirst().get();
+    }
+
+    private HpSPI getHpSPI() {
+        return ServiceLoader.load(HpSPI.class).stream().map(ServiceLoader.Provider::get).collect(toList()).stream().findFirst().get();
     }
 }

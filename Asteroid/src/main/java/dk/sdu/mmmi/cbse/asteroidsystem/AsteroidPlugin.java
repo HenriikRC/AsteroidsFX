@@ -12,11 +12,11 @@ import java.util.Random;
 public class AsteroidPlugin  implements IGamePluginService, IEntityProcessingService {
 
     private final Random rand = new Random();
-    private final int MAX_ASTEROIDS = 20;
+    private final int MAX_ASTEROIDS = 10;
     private final int SPAWN_INTERVAL = 3000;
     private volatile long lastSpawnTime = 0;
     private final double MIN_SPEED = 0.5d;
-    private final double MAX_SPEED = 3d;
+    private final double MAX_SPEED = 2d;
 
     @Override
     public void start(GameData gameData, World world) {
@@ -42,7 +42,7 @@ public class AsteroidPlugin  implements IGamePluginService, IEntityProcessingSer
 
     private Entity createAsteroid(GameData gameData) {
         Asteroid asteroid = new Asteroid();
-        int size = rand.nextInt(10,40);
+        int size = rand.nextInt(20,40);
         asteroid.setSize(size);
         asteroid.setPolygonCoordinates(0, 0, size, 0, size, size, 0, size,0,size);
         int side = rand.nextInt(4);

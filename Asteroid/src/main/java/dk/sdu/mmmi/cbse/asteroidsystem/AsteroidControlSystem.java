@@ -38,7 +38,8 @@ public class AsteroidControlSystem implements IEntityProcessingService, Asteroid
     public void splitAsteroid(Entity entity, World world) {
         Asteroid asteroid = (Asteroid) entity;
         int newSize = asteroid.getSize() / 2;
-        if (newSize < 10) {
+        System.out.println("hit with size " + asteroid.getSize() + " new size " + newSize);
+        if (newSize <= 12) {
             world.removeEntity(asteroid);
             return;
         }
