@@ -3,7 +3,8 @@ package dk.sdu.mmmi.cbse.asteroidsystem;
 import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
-import dk.sdu.mmmi.cbse.common.services.AsteroidSPI;
+import dk.sdu.mmmi.cbse.commonasteroid.Asteroid;
+import dk.sdu.mmmi.cbse.commonasteroid.AsteroidSPI;
 import dk.sdu.mmmi.cbse.common.services.IEntityProcessingService;
 
 public class AsteroidControlSystem implements IEntityProcessingService, AsteroidSPI {

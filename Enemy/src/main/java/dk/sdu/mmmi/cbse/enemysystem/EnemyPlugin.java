@@ -5,9 +5,8 @@ import dk.sdu.mmmi.cbse.common.data.EntityType;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
 import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
+import dk.sdu.mmmi.cbse.commonenemy.Enemy;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 public class EnemyPlugin implements IGamePluginService {

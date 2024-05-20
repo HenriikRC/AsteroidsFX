@@ -1,4 +1,4 @@
-package dk.sdu.mmmi.cbse.common.services;
+package dk.sdu.mmmi.cbse.commonplayer;
 
 public interface TargetSPI {
 

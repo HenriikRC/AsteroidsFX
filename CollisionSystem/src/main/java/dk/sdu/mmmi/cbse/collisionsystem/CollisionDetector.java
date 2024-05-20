@@ -4,12 +4,10 @@ import dk.sdu.mmmi.cbse.common.data.Entity;
 import dk.sdu.mmmi.cbse.common.data.EntityType;
 import dk.sdu.mmmi.cbse.common.data.GameData;
 import dk.sdu.mmmi.cbse.common.data.World;
-import dk.sdu.mmmi.cbse.common.services.AsteroidSPI;
-import dk.sdu.mmmi.cbse.common.services.HpSPI;
-import dk.sdu.mmmi.cbse.common.services.IGamePluginService;
+import dk.sdu.mmmi.cbse.commonasteroid.AsteroidSPI;
+import dk.sdu.mmmi.cbse.commonspaceship.HpSPI;
 import dk.sdu.mmmi.cbse.common.services.IPostEntityProcessingService;
 
-import java.util.Collection;
 import java.util.ServiceLoader;
 
 import static java.util.stream.Collectors.toList;

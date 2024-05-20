@@ -1,6 +1,6 @@
 package dk.sdu.mmmi.cbse.playersystem;
 
-import dk.sdu.mmmi.cbse.common.services.TargetSPI;
+import dk.sdu.mmmi.cbse.commonplayer.TargetSPI;
 
 public class PlayerTargetSystem implements TargetSPI {
 
