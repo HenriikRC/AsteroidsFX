@@ -28,6 +28,9 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Polygon;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 
 public class Main extends Application {
 
@@ -36,6 +39,7 @@ public class Main extends Application {
     private final Map<Entity, Polygon> polygons = new ConcurrentHashMap<>();
     private final Pane gameWindow = new Pane();
     private static ModuleLayer moduleLayer;
+    private Text text = new Text(10, 20, "Asteroids hit: 0");
 
     public static void main(String[] args) {
         Path plugins = Paths.get("plugins");
@@ -49,7 +53,6 @@ public class Main extends Application {
 
     @Override
     public void start(Stage window) throws Exception {
-        Text text = new Text(10, 20, "Destroyed asteroids: 0");
         gameWindow.setPrefSize(gameData.getDisplayWidth(), gameData.getDisplayHeight());
         gameWindow.getChildren().add(text);
 
@@ -102,6 +105,21 @@ public class Main extends Application {
 
     }
 
+    private void updateScore() {
+        HttpClient httpClient = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(java.net.URI.create("http://localhost:8080/points"))
+                .GET()
+                .build();
+        try {
+            HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+            String score = response.body();
+            text.setText("Destroyed asteroids: " + score);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     private void render() {
         new AnimationTimer() {
             private long then = 0;
@@ -111,6 +129,7 @@ public class Main extends Application {
                 update();
                 draw();
                 gameData.getKeys().update();
+                updateScore();
             }
 
         }.start();

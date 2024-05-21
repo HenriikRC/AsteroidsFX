@@ -5,7 +5,8 @@ import dk.sdu.mmmi.cbse.common.services.IPostEntityProcessingService;
 module Core {
     requires Common;
     requires CommonBullet;    
-    requires javafx.graphics;    
+    requires javafx.graphics;
+    requires java.net.http;
     opens dk.sdu.mmmi.cbse.core to javafx.graphics;
     uses IGamePluginService;
     uses IEntityProcessingService;

@@ -7,6 +7,7 @@ module CollisionSystem {
     requires Common;
     requires CommonAsteroid;
     requires CommonSpaceship;
+    requires java.net.http;
     provides IPostEntityProcessingService with CollisionDetector;
 
     exports dk.sdu.mmmi.cbse.collisionsystem;
